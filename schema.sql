@@ -3,3 +3,4 @@ CREATE TABLE modules ( id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(150) NOT
 CREATE TABLE quizzes ( id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), module_id INT, CONSTRAINT fk_quizzes_module FOREIGN KEY (module_id) REFERENCES modules(id) ON DELETE SET NULL );
 CREATE TABLE questions ( id INT AUTO_INCREMENT PRIMARY KEY, quiz_id INT NOT NULL, question_text TEXT, CONSTRAINT fk_questions_quiz FOREIGN KEY (quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE );
 CREATE TABLE choices ( id INTEGER PRIMARY KEY, question_id INTEGER, choice_text VARCHAR(255), is_correct BOOLEAN DEFAULT FALSE, FOREIGN KEY (question_id) REFERENCES questions(id) );
+CREATE TABLE user_progress ( id INTEGER PRIMARY KEY, user_id INTEGER NOT NULL, module_id INTEGER NOT NULL, quiz_score INTEGER, completed BOOLEAN DEFAULT FALSE, FOREIGN KEY (user_id) REFERENCES users(id), FOREIGN KEY (module_id) REFERENCES modules(id) );
